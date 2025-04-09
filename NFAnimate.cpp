@@ -8,11 +8,11 @@ class NFAnimator : public emp::web::Animate {
     emp::web::Canvas canvas;
    
     public: 
-    NFAnimator() : canvas(100, 100, "canvas") {
+    NFAnimator() : canvas(200, 200, "canvas") {
       canvas.Rect(0, 0, 10, 10, "white", "black");
       //create a 15 x 10 grid of rectangles on canvas
-      for (int i = 0; i < 15; ++i) {
-          for (int j = 0; j < 10; ++j) {
+      for (int i = 0; i < 15; i++) {
+          for (int j = 0; j < 10; j++) {
               canvas.Rect(i * 10, j * 10, 10, 10, "white", "black");
           }
       }
@@ -27,17 +27,15 @@ class NFAnimator : public emp::web::Animate {
         if (neighborx == 0 && neighbory == 0) continue; // skip center cell
         int modx = emp::Mod(x + neighborx, 15);
         int mody = emp::Mod(y + neighbory, 10);
-        if (modx >= 0 && modx < 15 && mody >= 0 && mody < 10) {
         canvas.Rect(modx * 10, mody * 10, 10, 10, "red", "black");
       }
     }
   }
-}
 };
 
 NFAnimator animator;
 
 int main() {
-   animator.FindNeighbors(0, 0);
+   animator.FindNeighbors(14, 9);
     animator.Step();
 }
